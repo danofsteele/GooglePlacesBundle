@@ -6,14 +6,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use DanOfSteele\GooglePlacesBundle\Places\Search;
+
 class DefaultController extends Controller
 {
     /**
-     * @Route("/hello/{name}")
+     * @Route("/search/{keywords}")
      * @Template()
      */
-    public function indexAction($name)
+    public function indexAction($keywords)
     {
-        return array('name' => $name);
+        $search = new Search;
+        
+        echo '<pre>';
+        print_r($search); exit;
+        
+        $results = array();
+        return array('results' => $results);
     }
 }
