@@ -1,7 +1,11 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+namespace DanOfSteele\GooglePlacesBundle\Places;
+
+/**
+ * https://developers.google.com/places/documentation/autocomplete
  */
-?>
+class QueryAutocomplete extends Places
+{
+    
+}

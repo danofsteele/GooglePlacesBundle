@@ -2,14 +2,16 @@
 
 namespace DanOfSteele\GooglePlacesBundle\Places;
 
+use Buzz\Browser;
+
 abstract class Places extends AbstractPlaces
 {
+    protected $browser;
     protected $key;
     protected $output;
     protected $method;
-    protected $api;
-    
-    abstract public function setMethod();
+    protected $apiEndpoint;
+    protected $parameters;
     
     /**
      * TODO: fetch API key from config.yml
@@ -17,18 +19,43 @@ abstract class Places extends AbstractPlaces
      */
     public function __construct()
     {
+        $this->setBrowser(new Browser());
         $this->setKey('AIzaSyDUdGAA6elyiwc-HWAyhUZ3JDjeR62UtmU');
         $this->setOutput('json');
-        $this->setApi('https://maps.googleapis.com/maps/api/place/');
+        $this->setApiEndpoint('https://maps.googleapis.com/maps/api/place/');
+        // populate the parameters
+        $this->setParameter('key', $this->getKey());
     }
     
     /**
      * 
+     * @param \Buzz\Browser $browser
+     */
+    public function setBrowser(Browser $browser)
+    {
+        $this->browser = $browser;
+    }
+    
+    /**
+     * 
+     * @return \Buzz\Browser
+     */
+    public function getBrowser()
+    {
+        return $this->browser;
+    }
+    
+    /**
+     * Your application's API key. This key identifies your application for 
+     * purposes of quota management and so that Places added from your 
+     * application are made immediately available to your app. Visit the APIs 
+     * Console to create an API Project and obtain your key.
      * @param string $key
      */
     public function setKey($key)
     {
         $this->key = $key;
+        $this->setParameter('key', $key);
     }
     
     /**
@@ -60,6 +87,15 @@ abstract class Places extends AbstractPlaces
     
     /**
      * 
+     * @param string $method
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
+    }
+    
+    /**
+     * 
      * @return string
      */
     public function getMethod()
@@ -71,7 +107,7 @@ abstract class Places extends AbstractPlaces
      * 
      * @param string $api
      */
-    public function setApi($api)
+    public function setApiEndpoint($api)
     {
         $this->api = $api;
     }
@@ -80,9 +116,55 @@ abstract class Places extends AbstractPlaces
      * 
      * @return string
      */
-    public function getApi()
+    public function getApiEndpoint()
     {
         return $this->api;
     }
-
+    
+    /**
+     * 
+     * @param string $name
+     * @param string $value
+     */
+    public function setParameter($name, $value)
+    {
+        $this->parameters[$name] = $value;
+    }
+    
+    /**
+     * 
+     * @return array
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getCompiledRequest()
+    {
+        return $this->getApiEndpoint().$this->getMethod().'/'.$this->getOutput().'?'.http_build_query($this->getParameters());
+    }
+    
+    /**
+     * TODO: debug why Buzz Browser is failing 
+     * @return string json/xml
+     */
+    public function send()
+    {
+        return file_get_contents($this->getCompiledRequest());
+        //return $this->getBrowser()->get($this->getCompiledRequest();
+    }
+    
+    /**
+     * 
+     * @return string json/xml
+     */
+    public function getResults()
+    {
+        return $this->send();
+    }
 }

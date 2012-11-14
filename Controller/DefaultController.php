@@ -18,10 +18,10 @@ class DefaultController extends Controller
     {
         $search = new Search;
         
-        echo '<pre>';
-        print_r($search); exit;
+        $search->setKeywords($keywords);
         
-        $results = array();
+        $results = $search->getResults();
+
         return array('results' => $results);
     }
 }
