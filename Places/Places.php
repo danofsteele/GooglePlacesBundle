@@ -3,6 +3,7 @@
 namespace DanOfSteele\GooglePlacesBundle\Places;
 
 use Buzz\Browser;
+use Buzz\Client\Curl;
 
 abstract class Places extends AbstractPlaces
 {
@@ -19,7 +20,7 @@ abstract class Places extends AbstractPlaces
      */
     public function __construct()
     {
-        $this->setBrowser(new Browser());
+        $this->setBrowser(new Browser(new Curl()));
         $this->setKey('AIzaSyDUdGAA6elyiwc-HWAyhUZ3JDjeR62UtmU');
         $this->setOutput('json');
         $this->setApiEndpoint('https://maps.googleapis.com/maps/api/place/');
@@ -150,21 +151,20 @@ abstract class Places extends AbstractPlaces
     }
     
     /**
-     * TODO: debug why Buzz Browser is failing 
-     * @return string json/xml
+     * @return Object Buzz\Message\Response
      */
     public function send()
     {
-        return file_get_contents($this->getCompiledRequest());
-        //return $this->getBrowser()->get($this->getCompiledRequest();
+        return $this->getBrowser()->get($this->getCompiledRequest());
     }
     
     /**
-     * 
+     * TODO: Handle errors
      * @return string json/xml
      */
     public function getResults()
     {
-        return $this->send();
+        $request = $this->send();
+        return $request->getContent();
     }
 }

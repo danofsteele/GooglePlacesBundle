@@ -16,8 +16,8 @@ class DefaultController extends Controller
      */
     public function indexAction($keywords)
     {
-        $search = new Search;
-        
+        $search = new Search();
+
         $search->setKeywords($keywords);
         
         $results = $search->getResults();
