@@ -186,11 +186,19 @@ abstract class Places extends AbstractPlaces
     
     /**
      * @todo Handle errors
+     * @param string $display
      * @return string json/xml
      */
-    public function getResults()
+    public function getResults($format = false)
     {
         $request = $this->send();
-        return $request->getContent();
+        
+        switch($format) 
+        {
+            case 'array':
+                return json_decode($request->getContent());
+            default:
+                return $request->getContent();
+        }
     }
 }
