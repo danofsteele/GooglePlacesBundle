@@ -3,20 +3,76 @@
 namespace DanOfSteele\GooglePlacesBundle\Places;
 
 /**
- * https://developers.google.com/places/documentation/search
+ * @example https://developers.google.com/places/documentation/search
  */
 class Search extends Places
 {
-    // required
+    /**
+     * The latitude/longitude around which to retrieve Place information. This 
+     * must be specified as latitude,longitude.
+     * @var string latitude,longitude
+     */
     protected $location;
+    
+    /**
+     * Defines the distance (in meters) within which to return Place results. 
+     * The maximum allowed radius is 50,000 meters. Note that radius must not be 
+     * included if rankby=distance is specified.
+     * @var integer
+     */
     protected $radius;
+    
+    /**
+     * Indicates whether or not the Place request came from a device using a 
+     * location sensor (e.g. a GPS) to determine the location sent in this 
+     * request. This value must be either true or false.
+     * @var string
+     */
     protected $sensor;
-    // optional
-    protected $keywords;
+    
+    /**
+     * A term to be matched against all content that Google has indexed for 
+     * this Place, including but not limited to name, type, and address, as 
+     * well as customer reviews and other third-party content.
+     * @var string
+     */
+    protected $keyword;
+    
+    /**
+     * The language code, indicating in which language the results should be 
+     * returned, if possible.
+     * @var string
+     */
     protected $language;
+    
+    /**
+     * A term to be matched against the names of Places. Results will be 
+     * restricted to those containing the passed name value.
+     * @var string
+     */
     protected $name;
+    
+    /**
+     * Specifies the order in which results are listed. Possible values are: 
+     * prominence|distance
+     * @var string
+     */
     protected $rankby;
+    
+    /**
+     * Restricts the results to Places matching at least one of the specified 
+     * types. Types should be separated with a pipe symbol (type1|type2|etc).
+     * @example https://developers.google.com/places/documentation/supported_types 
+     * @var string
+     */
     protected $types;
+    
+    /**
+     * Returns the next 20 results from a previously run search. Setting a 
+     * pagetoken parameter will execute a search with the same parameters used 
+     * previously — all parameters other than pagetoken will be ignored.
+     * @var integer
+     */
     protected $pagetoken;
     
     /**
@@ -29,15 +85,13 @@ class Search extends Places
         // set the API method for Search
         $this->setMethod('nearbysearch');
         // set some defaults
-        $this->setLocation('51.507033,-0.127716');
-        $this->setRadius(10000);
+        $this->setLocation('51.507033,-0.127716'); // London
+        $this->setRadius(10000); // 10km
         $this->setSensor('false');
         $this->setLanguage('en');
     }
     
     /**
-     * The latitude/longitude around which to retrieve Place information. This 
-     * must be specified as latitude,longitude.
      * @param string $location
      */
     public function setLocation($location)
@@ -47,7 +101,6 @@ class Search extends Places
     }
     
     /**
-     * 
      * @return string
      */
     public function getLocation()
@@ -56,9 +109,6 @@ class Search extends Places
     }
     
     /**
-     * Defines the distance (in meters) within which to return Place results. 
-     * The maximum allowed radius is 50,000 meters. Note that radius must not be 
-     * included if rankby=distance is specified.
      * @param integer $radius
      */
     public function setRadius($radius)
@@ -77,9 +127,6 @@ class Search extends Places
     }
     
     /**
-     * Indicates whether or not the Place request came from a device using a 
-     * location sensor (e.g. a GPS) to determine the location sent in this 
-     * request. This value must be either true or false.
      * @param string $sensor
      */
     public function setSensor($sensor)
@@ -89,7 +136,6 @@ class Search extends Places
     }
     
     /**
-     * 
      * @return string
      */
     public function getSensor()
@@ -98,29 +144,43 @@ class Search extends Places
     }
     
     /**
-     *  A term to be matched against all content that Google has indexed for 
-     *  this Place, including but not limited to name, type, and address, as 
-     *  well as customer reviews and other third-party content.
+     * @param string $keywords
+     */
+    private function setKeyword($keyword)
+    {
+        $this->keyword = trim($keyword);
+        $this->setParameter('keyword', $this->getKeyword());
+    }
+    
+    /**
+     * A human friendly setter for setKeyword
+     * @see setKeyword
      * @param string $keywords
      */
     public function setKeywords($keywords)
     {
-        $this->keywords = trim($keywords);
-        $this->setParameter('keyword', $this->getKeywords());
+        $this->setKeyword($keywords);
     }
     
     /**
-     * 
+     * @return string
+     */
+    private function getKeyword()
+    {
+        return $this->keyword;
+    }
+    
+    /**
+     * A human friendly getter for getKeyword
+     * @see getKeyword
      * @return string
      */
     public function getKeywords()
     {
-        return $this->keywords;
+        return $this->getKeyword();
     }
     
     /**
-     * The language code, indicating in which language the results should be 
-     * returned, if possible.
      * @param string $language
      */
     public function setLanguage($language)
@@ -139,8 +199,6 @@ class Search extends Places
     }
     
     /**
-     * A term to be matched against the names of Places. Results will be 
-     * restricted to those containing the passed name value.
      * @param string $name
      */
     public function setName($name)
@@ -159,8 +217,6 @@ class Search extends Places
     }
     
     /**
-     * Specifies the order in which results are listed. Possible values are: 
-     * prominence|distance
      * @param string $rankby
      */
     public function setRankby($rankby)
@@ -179,9 +235,6 @@ class Search extends Places
     }
     
     /**
-     * Restricts the results to Places matching at least one of the specified 
-     * types. Types should be separated with a pipe symbol (type1|type2|etc).
-     * Supported types: https://developers.google.com/places/documentation/supported_types 
      * @param string $types
      */
     public function setTypes($types)
@@ -200,9 +253,6 @@ class Search extends Places
     }
     
     /**
-     * Returns the next 20 results from a previously run search. Setting a 
-     * pagetoken parameter will execute a search with the same parameters used 
-     * previously — all parameters other than pagetoken will be ignored.
      * @param integer $page
      */
     private function setPagetoken($page)

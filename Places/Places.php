@@ -7,16 +7,48 @@ use Buzz\Client\Curl;
 
 abstract class Places extends AbstractPlaces
 {
+    /**
+     * @var \Buzz\Browser
+     */
     protected $browser;
+    
+    /**
+     * Your application's API key. This key identifies your application for 
+     * purposes of quota management and so that Places added from your 
+     * application are made immediately available to your app. Visit the APIs 
+     * Console to create an API Project and obtain your key.
+     * @var string
+     */
     protected $key;
+    
+    /**
+     * The format of the returned data, either JSON or XML
+     * @var string
+     */
     protected $output;
+    
+    /**
+     * The API method
+     * @var string
+     */
     protected $method;
+    
+    /**
+     * The API endpoint
+     * @example https://maps.googleapis.com/maps/api/place/
+     * @var string
+     */
     protected $apiEndpoint;
+    
+    /**
+     * A parameter holder for the request parameters
+     * @var array
+     */
     protected $parameters;
     
     /**
-     * TODO: fetch API key from config.yml
-     * TODO: fetch output format from config.yml
+     * @todo fetch API key from config.yml
+     * @todo fetch output format from config.yml
      */
     public function __construct()
     {
@@ -29,7 +61,6 @@ abstract class Places extends AbstractPlaces
     }
     
     /**
-     * 
      * @param \Buzz\Browser $browser
      */
     public function setBrowser(Browser $browser)
@@ -38,7 +69,6 @@ abstract class Places extends AbstractPlaces
     }
     
     /**
-     * 
      * @return \Buzz\Browser
      */
     public function getBrowser()
@@ -47,10 +77,6 @@ abstract class Places extends AbstractPlaces
     }
     
     /**
-     * Your application's API key. This key identifies your application for 
-     * purposes of quota management and so that Places added from your 
-     * application are made immediately available to your app. Visit the APIs 
-     * Console to create an API Project and obtain your key.
      * @param string $key
      */
     public function setKey($key)
@@ -159,7 +185,7 @@ abstract class Places extends AbstractPlaces
     }
     
     /**
-     * TODO: Handle errors
+     * @todo Handle errors
      * @return string json/xml
      */
     public function getResults()
