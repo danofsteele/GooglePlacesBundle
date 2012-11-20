@@ -41,6 +41,21 @@ abstract class Places extends AbstractPlaces
     protected $apiEndpoint;
     
     /**
+     * Indicates whether or not the Place request came from a device using a 
+     * location sensor (e.g. a GPS) to determine the location sent in this 
+     * request. This value must be either true or false.
+     * @var string
+     */
+    protected $sensor;
+    
+    /**
+     * The language code, indicating in which language the results should be 
+     * returned, if possible.
+     * @var string
+     */
+    protected $language;
+    
+    /**
      * A parameter holder for the request parameters
      * @var array
      */
@@ -146,6 +161,41 @@ abstract class Places extends AbstractPlaces
     public function getApiEndpoint()
     {
         return $this->api;
+    }
+    
+    /**
+     * @param string $sensor
+     */
+    public function setSensor($sensor)
+    {
+        $this->sensor = $sensor;
+        $this->setParameter('sensor', $this->getSensor());
+    }
+    
+    /**
+     * @return string
+     */
+    public function getSensor()
+    {
+        return $this->sensor;
+    }
+    
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+        $this->setParameter('langauge', $this->getLanguage());
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
     }
     
     /**

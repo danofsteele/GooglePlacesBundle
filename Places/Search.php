@@ -127,23 +127,6 @@ class Search extends Places
     }
     
     /**
-     * @param string $sensor
-     */
-    public function setSensor($sensor)
-    {
-        $this->sensor = $sensor;
-        $this->setParameter('sensor', $this->getSensor());
-    }
-    
-    /**
-     * @return string
-     */
-    public function getSensor()
-    {
-        return $this->sensor;
-    }
-    
-    /**
      * @param string $keywords
      */
     private function setKeyword($keyword)
@@ -178,24 +161,6 @@ class Search extends Places
     public function getKeywords()
     {
         return $this->getKeyword();
-    }
-    
-    /**
-     * @param string $language
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-        $this->setParameter('langauge', $this->getLanguage());
-    }
-    
-    /**
-     * 
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->language;
     }
     
     /**
