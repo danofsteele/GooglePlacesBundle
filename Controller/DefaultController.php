@@ -19,9 +19,11 @@ class DefaultController extends Controller
     public function searchAction($keywords)
     {
         $search = new Search();
+        
         $search->setKeywords($keywords);
-        $search->setLocation('51.507033,-0.127716');
-        $search->setRadius(10000);
+        $search->setLocation('51.507033,-0.127716'); // London
+        $search->setRadius(10000); // 10km
+        
         $results = $search->getResults();
 
         return array('results' => $results);
@@ -34,6 +36,7 @@ class DefaultController extends Controller
     public function detailsAction($reference)
     {
         $details = new Details();
+        
         $details->setReference($reference);
         $results = $details->getResults();
         
@@ -47,9 +50,10 @@ class DefaultController extends Controller
     public function placeAutocompleteAction($input)
     {
         $autocomplete = new PlaceAutocomplete();
+        
         $autocomplete->setInput($input);
-        //$autocomplete->setTypes('country');
-        $autocomplete->setComponents('country:fr');
+        $autocomplete->setTypes('(cities)');
+        //$autocomplete->setComponents('country:gb');
         
         $results = $autocomplete->getResults();
         

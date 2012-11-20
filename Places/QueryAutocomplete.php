@@ -7,6 +7,7 @@ namespace DanOfSteele\GooglePlacesBundle\Places;
  */
 class QueryAutocomplete extends Autocomplete
 {
+    
     /**
      * 
      */
@@ -14,4 +15,5 @@ class QueryAutocomplete extends Autocomplete
     {
         parent::__construct('query');
     }
+    
 }

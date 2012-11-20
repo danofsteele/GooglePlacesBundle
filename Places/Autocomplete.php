@@ -26,30 +26,6 @@ class Autocomplete extends Search
     protected $offset;
     
     /**
-     * A grouping of places to which you would like to restrict your results. 
-     * Currently, you can use components to filter by country. The country must 
-     * be passed as a two character, ISO 3166-1 Alpha-2 compatible country code. 
-     * For example: components=country:fr would restrict your results to places 
-     * within France.
-     * @var string
-     */
-    protected $components;
-    
-    /**
-     * instructs the Place service to return only geocoding (address) results. 
-     * Generally, you use this request to disambiguate results where the 
-     * location specified may be indeterminate.
-     * @var string true|false
-     */
-    protected $geocode;
-    
-    /**
-     * instructs the Place service to return only business results.
-     * @var string true|false
-     */
-    protected $establishment;
-    
-    /**
      * @param string $type
      */
     public function __construct($type = 'places')
@@ -99,23 +75,6 @@ class Autocomplete extends Search
     public function getOffset()
     {
         return $this->offset;
-    }
-    
-    /**
-     * @param string $components
-     */
-    public function setComponents($components)
-    {
-        $this->components = $components;
-        $this->setParameter('components', $this->getComponents());
-    }
-    
-    /**
-     * @return string
-     */
-    public function getComponents()
-    {
-        return $this->components;
     }
     
 }
