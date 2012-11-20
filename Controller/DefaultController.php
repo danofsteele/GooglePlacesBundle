@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use DanOfSteele\GooglePlacesBundle\Places\Search;
 use DanOfSteele\GooglePlacesBundle\Places\Details;
+use DanOfSteele\GooglePlacesBundle\Places\PlaceAutocomplete;
 
 class DefaultController extends Controller
 {
@@ -19,6 +20,8 @@ class DefaultController extends Controller
     {
         $search = new Search();
         $search->setKeywords($keywords);
+        $search->setLocation('51.507033,-0.127716');
+        $search->setRadius(10000);
         $results = $search->getResults();
 
         return array('results' => $results);
@@ -33,6 +36,22 @@ class DefaultController extends Controller
         $details = new Details();
         $details->setReference($reference);
         $results = $details->getResults();
+        
+        return array('results' => $results);
+    }
+    
+    /**
+     * @Route("/search/autocomplete/{input}")
+     * @Template()
+     */
+    public function placeAutocompleteAction($input)
+    {
+        $autocomplete = new PlaceAutocomplete();
+        $autocomplete->setInput($input);
+        //$autocomplete->setTypes('country');
+        $autocomplete->setComponents('country:fr');
+        
+        $results = $autocomplete->getResults();
         
         return array('results' => $results);
     }

@@ -23,27 +23,12 @@ class Search extends Places
     protected $radius;
     
     /**
-     * Indicates whether or not the Place request came from a device using a 
-     * location sensor (e.g. a GPS) to determine the location sent in this 
-     * request. This value must be either true or false.
-     * @var string
-     */
-    protected $sensor;
-    
-    /**
      * A term to be matched against all content that Google has indexed for 
      * this Place, including but not limited to name, type, and address, as 
      * well as customer reviews and other third-party content.
      * @var string
      */
     protected $keyword;
-    
-    /**
-     * The language code, indicating in which language the results should be 
-     * returned, if possible.
-     * @var string
-     */
-    protected $language;
     
     /**
      * A term to be matched against the names of Places. Results will be 
@@ -84,11 +69,8 @@ class Search extends Places
         
         // set the API method for Search
         $this->setMethod('nearbysearch');
-        // set some defaults
-        $this->setLocation('51.507033,-0.127716'); // London
-        $this->setRadius(10000); // 10km
+        // set the sensor option to false by default
         $this->setSensor('false');
-        $this->setLanguage('en');
     }
     
     /**

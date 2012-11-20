@@ -242,7 +242,7 @@ abstract class Places extends AbstractPlaces
     public function getResults($format = false)
     {
         $request = $this->send();
-        
+                
         switch($format) 
         {
             case 'array':
