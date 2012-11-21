@@ -1,0 +1,24 @@
+{
+    "name": "danofsteele/google-places-bundle",
+    "description": "The Google Places Bundle gives you interface to the Google Places API",
+    "keywords": ["google", "places", "geolocate", "maps"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "danofsteele",
+            "homepage": "https://github.com/danofsteele"
+        }
+    ],
+    "require": {
+        "php":                  ">=5.3.0",
+        "symfony/symfony":      ">=2.0",
+        "kriswallsmith/buzz":   "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "DanOfSteele\\GooglePlacesBundle": ""
+        }
+    },
+    "target-dir" : "DanOfSteele/GooglePlacesBundle"
+}
