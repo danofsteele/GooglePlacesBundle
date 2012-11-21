@@ -62,17 +62,17 @@ abstract class Places extends AbstractPlaces
     protected $parameters;
     
     /**
-     * @todo fetch API key from config.yml
-     * @todo fetch output format from config.yml
+     *
      */
-    public function __construct()
+    public function __construct($container)
     {
+        $this->container = $container;
+        
         $this->setBrowser(new Browser(new Curl()));
-        $this->setKey('AIzaSyDUdGAA6elyiwc-HWAyhUZ3JDjeR62UtmU');
-        $this->setOutput('json');
-        $this->setApiEndpoint('https://maps.googleapis.com/maps/api/place/');
-        // populate the parameters
-        $this->setParameter('key', $this->getKey());
+        $this->setKey($container->getParameter('dan_of_steele_google_places.api.key'));
+        $this->setOutput($container->getParameter('dan_of_steele_google_places.api.output'));
+        $this->setApiEndpoint($container->getParameter('dan_of_steele_google_places.api.endpoint'));
+
     }
     
     /**

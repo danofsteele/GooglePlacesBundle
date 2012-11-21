@@ -17,8 +17,8 @@ class DefaultController extends Controller
      * @Template()
      */
     public function searchAction($keywords)
-    {
-        $search = new Search();
+    {              
+        $search = new Search($this->container);
         
         $search->setKeywords($keywords);
         $search->setLocation('51.507033,-0.127716'); // London
@@ -35,7 +35,7 @@ class DefaultController extends Controller
      */
     public function detailsAction($reference)
     {
-        $details = new Details();
+        $details = new Details($this->container);
         
         $details->setReference($reference);
         $results = $details->getResults();
@@ -49,7 +49,7 @@ class DefaultController extends Controller
      */
     public function placeAutocompleteAction($input)
     {
-        $autocomplete = new PlaceAutocomplete();
+        $autocomplete = new PlaceAutocomplete($this->container);
         
         $autocomplete->setInput($input);
         $autocomplete->setTypes('(cities)');

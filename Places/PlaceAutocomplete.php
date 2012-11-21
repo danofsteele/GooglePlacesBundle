@@ -20,9 +20,9 @@ class PlaceAutocomplete extends Autocomplete
     /**
      * 
      */
-    public function __construct()
+    public function __construct($container)
     {
-        parent::__construct('place');
+        parent::__construct($container, 'place');
     }
     
     /**
