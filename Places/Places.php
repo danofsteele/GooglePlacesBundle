@@ -5,7 +5,7 @@ namespace DanOfSteele\GooglePlacesBundle\Places;
 use Buzz\Browser;
 use Buzz\Client\Curl;
 
-abstract class Places extends AbstractPlaces
+class Places
 {
     /**
      * @var \Buzz\Browser
