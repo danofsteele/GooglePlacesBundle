@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="Tests/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="DanOfSteele GooglePlacesBundle Test Suite">
+            <directory suffix="Test.php">./Tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <!-- server name="VENDOR_PATH" value="/path/to/vendor/dir" /-->
+    </php>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">/Places/</directory>
+        </whitelist>
+    </filter>
+</phpunit>

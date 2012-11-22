@@ -28,9 +28,9 @@ class Autocomplete extends Search
     /**
      * @param string $type
      */
-    public function __construct($container, $type = 'places')
+    public function __construct($type = 'places')
     {
-        parent::__construct($container);
+        parent::__construct();
         
         switch($type)
         {

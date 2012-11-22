@@ -11,9 +11,9 @@ class QueryAutocomplete extends Autocomplete
     /**
      * 
      */
-    public function __construct($container)
+    public function __construct()
     {
-        parent::__construct($container, 'query');
+        parent::__construct('query');
     }
     
 }

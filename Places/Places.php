@@ -7,6 +7,7 @@ use Buzz\Client\Curl;
 
 class Places
 {
+    
     /**
      * @var \Buzz\Browser
      */
@@ -64,15 +65,10 @@ class Places
     /**
      *
      */
-    public function __construct($container)
+    public function __construct()
     {
-        $this->container = $container;
-        
         $this->setBrowser(new Browser(new Curl()));
-        $this->setKey($container->getParameter('dan_of_steele_google_places.api.key'));
-        $this->setOutput($container->getParameter('dan_of_steele_google_places.api.output'));
-        $this->setApiEndpoint($container->getParameter('dan_of_steele_google_places.api.endpoint'));
-
+        $this->setApiEndpoint('https://maps.googleapis.com/maps/api/place/');
     }
     
     /**

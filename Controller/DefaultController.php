@@ -18,7 +18,10 @@ class DefaultController extends Controller
      */
     public function searchAction($keywords)
     {              
-        $search = new Search($this->container);
+        $search = new Search();
+        
+        $search->setKey($this->container->getParameter('dan_of_steele_google_places.api.key')); 
+        $search->setOutput('json');
         
         $search->setKeywords($keywords);
         $search->setLocation('51.507033,-0.127716'); // London
@@ -35,7 +38,10 @@ class DefaultController extends Controller
      */
     public function detailsAction($reference)
     {
-        $details = new Details($this->container);
+        $details = new Details();
+        
+        $details->setKey($this->container->getParameter('dan_of_steele_google_places.api.key')); 
+        $details->setOutput('json');
         
         $details->setReference($reference);
         $results = $details->getResults();
@@ -49,7 +55,10 @@ class DefaultController extends Controller
      */
     public function placeAutocompleteAction($input)
     {
-        $autocomplete = new PlaceAutocomplete($this->container);
+        $autocomplete = new PlaceAutocomplete();
+        
+        $autocomplete->setKey($this->container->getParameter('dan_of_steele_google_places.api.key')); 
+        $autocomplete->setOutput('json');
         
         $autocomplete->setInput($input);
         $autocomplete->setTypes('(cities)');

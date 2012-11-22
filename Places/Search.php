@@ -63,9 +63,9 @@ class Search extends Places
     /**
      * 
      */
-    public function __construct($container)
+    public function __construct()
     {
-        parent::__construct($container);
+        parent::__construct();
         
         // set the API method for Search
         $this->setMethod('nearbysearch');
